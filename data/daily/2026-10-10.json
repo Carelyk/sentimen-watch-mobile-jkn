@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-10",
+  "app": "Mobile JKN",
+  "summary": {
+    "total": 200,
+    "positif": 103,
+    "negatif": 55,
+    "netral": 42,
+    "pos_ratio": 0.515,
+    "neg_ratio": 0.275
+  },
+  "baseline": {
+    "days": 7,
+    "neg_ratio": 0.241
+  },
+  "verdict": {
+    "anomaly": false,
+    "reasons": []
+  },
+  "provider": "groq",
+  "insight": {
+    "ringkasan": "Pada 10 Oktober 2026 terdapat 200 ulasan; 103 positif (51.5%), 55 negatif (27.5%), 42 netral (21%). Negatif ratio naik dari 24.1% baseline 7 hari ke 27.5% saat ini.",
+    "tren": "Sentimen negatif meningkat dibandingkan minggu sebelumnya, sementara sentimen positif tetap stabil (data baseline positif tidak tersedia).",
+    "anomali": [
+      {
+        "temuan": "Peningkatan rasio ulasan negatif",
+        "bukti_angka": "Negatif ratio 0.275 vs baseline 0.241 (↑0.034)",
+        "dugaan_penyebab": "Kemungkinan adanya bug atau perubahan fitur setelah update terbaru yang menimbulkan keluhan pengguna"
+      }
+    ],
+    "rekomendasi": [
+      {
+        "tindakan": "Lakukan analisis mendalam pada ulasan negatif untuk mengidentifikasi isu spesifik",
+        "alasan": "Menemukan akar masalah memungkinkan perbaikan cepat dan menurunkan rasio negatif",
+        "prioritas": 1
+      },
+      {
+        "tindakan": "Prioritaskan perbaikan bug atau penyesuaian fitur yang disebutkan dalam ulasan negatif",
+        "alasan": "Mengatasi penyebab utama keluhan dapat meningkatkan kepuasan pengguna",
+        "prioritas": 2
+      },
+      {
+        "tindakan": "Komunikasikan perbaikan dan rencana peningkatan kepada pengguna melalui update notes",
+        "alasan": "Transparansi meningkatkan kepercayaan dan dapat mengubah sentimen negatif menjadi positif",
+        "prioritas": 3
+      }
+    ],
+    "catatan_keterbatasan": "Tidak tersedia data baseline untuk rasio positif dan netral, sehingga perbandingan terbatas pada rasio negatif."
+  }
+}

@@ -42,7 +42,9 @@ NEG_RATIO_INCREASE = float(os.getenv("NEG_RATIO_INCREASE", "0.5"))
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+# Provider pertama yang dicoba: "groq" (default, hemat kuota Gemini) atau "gemini".
+LLM_PRIMARY = os.getenv("LLM_PRIMARY", "groq").strip().lower()
 
 # --- Notifikasi & dashboard ---
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "").strip()

@@ -20,7 +20,7 @@ Cerita satu kalimat:
 | Kanal alert | **GitHub Issue** (utama, otomatis); Discord webhook (opsional) |
 | Penjadwal | GitHub Actions (cron harian) |
 | Klasifikasi | Lexicon lokal (gratis, hemat limit); bisa ditingkatkan ke SVM/TF-IDF |
-| LLM narasi | Gemini (utama) -> Groq (fallback), hanya saat ada anomali |
+| LLM narasi | **Groq (utama) -> Gemini (fallback)** — model `openai/gpt-oss-120b`, hanya saat ada anomali |
 | SQL | DuckDB / SQLite untuk latihan query tren |
 | Bahasa | Python 3.12 |
 
@@ -32,7 +32,7 @@ GitHub Actions (cron harian)
   -> klasifikasi lokal            (lexicon + negasi)        [pipeline/classify.py]   <-- tanpa LLM
   -> deteksi anomali              (rasio vs baseline)       [pipeline/detect.py]
        |- normal  -> simpan, selesai                       (0 panggilan LLM)
-       |- anomali -> 1x LLM narasi (Gemini -> Groq)         [pipeline/llm.py]
+       |- anomali -> 1x LLM narasi (Groq -> Gemini)         [pipeline/llm.py]
                      -> GitHub Issue (alert + arsip)        [pipeline/export.py]
                      -> Google Sheets -> Looker Studio      [pipeline/export.py]
                      -> Discord webhook (opsional)          [pipeline/export.py]
@@ -43,7 +43,7 @@ GitHub Actions (cron harian)
 2. Dilarang mengarang angka; hanya angka yang di-inject yang boleh dipakai.
 3. Output **JSON** supaya hasil bisa langsung dipakai sistem (dashboard/alert).
 4. Prompt disimpan sebagai file -> ada riwayat perubahan (versionable).
-5. LLM hanya dipanggil saat anomali -> hemat kuota gratis Gemini/Groq.
+5. LLM hanya dipanggil saat anomali -> hemat kuota gratis Groq/Gemini.
 
 ## Struktur folder
 ```
@@ -52,20 +52,28 @@ pipeline/            <- kode pipeline (jalankan sebagai modul)
   fetch_reviews.py      ambil ulasan Play Store
   classify.py           klasifikasi sentimen lokal (lexicon/negasi)
   detect.py             deteksi anomali vs baseline
-  llm.py                panggil Gemini -> Groq, pakai template persona
+  llm.py                panggil Groq -> Gemini, pakai template persona
   export.py             simpan JSON/CSV + GitHub Issue + Discord + Sheets
   backfill.py           tarik riwayat 2025 -> sekarang (sekali jalan)
+  push_sheets.py        kirim seluruh riwayat ke Google Sheets
   run.py                orkestrator harian
 prompts/             <- template persona LLM
-  data_analyst.md       insight harian
+  data_analyst.md       insight harian (untuk manajemen)
   data_scientist.md     evaluasi model (berkala)
   data_engineer.md      cek kualitas data (opsional)
+  warga.md              ringkasan bahasa awam untuk publik
+notebooks/
+  01_eda.ipynb          EDA + query SQL (DuckDB) + grafik
+docs/
+  looker_studio.md      panduan dashboard Looker Studio (gratis)
 data/
   sample_reviews.json   contoh data untuk uji tanpa internet
   sentiment_daily.csv   deret waktu harian 2025-2026 (sumber dashboard)
   backfill/monthly.csv  agregat bulanan (sumber dashboard)
   daily/                ringkasan JSON per hari
 .github/workflows/   <- penjadwal harian (GitHub Actions)
+requirements.txt       dependensi pipeline
+requirements-eda.txt   dependensi notebook EDA
 ```
 
 ## Cara menjalankan (lokal)
@@ -107,28 +115,39 @@ env Actions, mis. `REVIEW_COUNT=500`. Makin besar -> tren makin halus,
 tapi proses makin lama. Play Store Mobile JKN punya >1 juta ulasan, jadi
 selalu ada data baru.
 
+## Analisis (notebook) & dashboard
+- **EDA + SQL**: buka `notebooks/01_eda.ipynb` — tren harian, pola bulanan, dan
+  beberapa query DuckDB. Pasang dulu: `pip install -r requirements-eda.txt`.
+- **Dashboard gratis**: panduan lengkap di `docs/looker_studio.md`
+  (Google Sheets -> Looker Studio). Isi seluruh riwayat sekali jalan:
+  ```powershell
+  .\.venv\Scripts\python -m pipeline.push_sheets
+  ```
+
 ## Cara pakai di Langflow
 1. Node **Prompt Template** -> isi salah satu file di `prompts/`.
 2. Ganti variabel `{...}` dengan data dari pipeline (angka dihitung di server).
-3. Untuk narasi harian pakai `data_analyst.md`; `data_scientist.md` untuk
-   laporan kualitas model; `data_engineer.md` sebagai rambu sebelum diproses.
+3. `data_analyst.md` untuk narasi manajemen; `warga.md` untuk versi bahasa awam;
+   `data_scientist.md` untuk laporan kualitas model; `data_engineer.md` sebagai
+   rambu sebelum diproses.
 
 ## Variabel tiap template
 - `data_analyst.md`   : `{sumber_data}` `{periode}` `{baseline_hari}` `{audiens}` `{ringkasan_json}`
+- `warga.md`          : `{sumber_data}` `{periode}` `{ringkasan_json}`
 - `data_scientist.md` : `{dataset}` `{sampel}` `{metrik_json}` `{contoh_salah}`
 - `data_engineer.md`  : `{sumber_data}` `{periode}` `{statistik_ingest}`
 
 ## Rahasia yang dibutuhkan (GitHub Secrets)
 | Nama | Kegunaan | Wajib? |
 | --- | --- | --- |
-| `GEMINI_API_KEY` | narasi harian (utama) | disarankan |
-| `GROQ_API_KEY` | narasi cadangan | opsional |
+| `GROQ_API_KEY` | narasi harian (utama) | disarankan |
+| `GEMINI_API_KEY` | narasi cadangan | opsional |
 | `GITHUB_TOKEN` | buat Issue alert (otomatis di Actions) | tidak perlu diisi |
 | `DISCORD_WEBHOOK_URL` | alert instan (opsional) | opsional |
 | `GOOGLE_SERVICE_ACCOUNT_JSON` | tulis ke Sheets | opsional |
 | `GOOGLE_SHEET_ID` | ID spreadsheet Looker | opsional |
 
 ## Langkah berikutnya
-- Ekspor CSV harian ke Google Sheets (service account) agar Looker Studio hidup.
-- Notebook EDA + query SQL (DuckDB) di atas `data/sentiment_daily.csv`.
+- Analisis kata kunci dari `data/backfill/raw_reviews.jsonl.gz`.
 - Latih ulang SVM/TF-IDF dari notebook skripsi lalu sambungkan ke `classify.py`.
+- Tambah chart Looker Studio (time series + musiman) mengikuti `docs/looker_studio.md`.

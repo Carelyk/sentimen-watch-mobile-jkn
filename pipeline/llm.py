@@ -18,6 +18,8 @@ GEMINI_URL = (
     "{model}:generateContent?key={key}"
 )
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+# Groq berada di belakang Cloudflare; User-Agent bawaan urllib diblokir (error 1010).
+USER_AGENT = "sentimen-watch/1.0 (+https://github.com/Carelyk/sentimen-watch-mobile-jkn)"
 
 
 # --- Template ---------------------------------------------------------------
@@ -69,6 +71,7 @@ def _post_json(url: str, payload: dict, headers: dict | None = None, timeout: in
     data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(url, data=data, method="POST")
     req.add_header("Content-Type", "application/json")
+    req.add_header("User-Agent", USER_AGENT)
     for key, value in (headers or {}).items():
         req.add_header(key, value)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -97,19 +100,29 @@ def call_groq(prompt: str) -> str:
     return data["choices"][0]["message"]["content"]
 
 
+def _available(name: str) -> bool:
+    return bool(config.GEMINI_API_KEY if name == "gemini" else config.GROQ_API_KEY)
+
+
+def _call(name: str, prompt: str) -> str:
+    return call_gemini(prompt) if name == "gemini" else call_groq(prompt)
+
+
+def provider_order() -> list[str]:
+    """Urutan provider sesuai LLM_PRIMARY (default groq -> gemini)."""
+    return ["gemini", "groq"] if config.LLM_PRIMARY == "gemini" else ["groq", "gemini"]
+
+
 def call_llm(prompt: str) -> dict[str, Any]:
-    """Coba Gemini lalu Groq. Kembalikan {provider, text, errors}."""
+    """Coba provider sesuai urutan, fallback ke berikutnya. {provider, text, errors}."""
     errors: list[str] = []
-    if config.GEMINI_API_KEY:
+    for name in provider_order():
+        if not _available(name):
+            continue
         try:
-            return {"provider": "gemini", "text": call_gemini(prompt), "errors": errors}
+            return {"provider": name, "text": _call(name, prompt), "errors": errors}
         except Exception as exc:  # noqa: BLE001 - laporkan dan lanjut ke fallback
-            errors.append(f"gemini: {exc}")
-    if config.GROQ_API_KEY:
-        try:
-            return {"provider": "groq", "text": call_groq(prompt), "errors": errors}
-        except Exception as exc:  # noqa: BLE001
-            errors.append(f"groq: {exc}")
+            errors.append(f"{name}: {exc}")
     if not errors:
         errors.append("tidak ada kunci LLM (GEMINI_API_KEY / GROQ_API_KEY kosong)")
     return {"provider": None, "text": None, "errors": errors}

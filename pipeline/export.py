@@ -168,19 +168,25 @@ def notify_github_issue(
         return None
 
 
+def sheets_credentials():
+    """Kredensial Sheets dari file path (lokal) atau isi JSON (GitHub Secret)."""
+    from google.oauth2.service_account import Credentials
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+    raw = config.GOOGLE_SERVICE_ACCOUNT_JSON
+    if raw.strip().startswith("{"):
+        return Credentials.from_service_account_info(json.loads(raw), scopes=scopes)
+    return Credentials.from_service_account_file(raw, scopes=scopes)
+
+
 def push_sheets(date_str: str, summary: dict, anomaly: bool, provider: str | None) -> bool:
     """Ekspor opsional ke Google Sheets (untuk dashboard Looker Studio)."""
     if not (config.GOOGLE_SERVICE_ACCOUNT_JSON and config.GOOGLE_SHEET_ID):
         return False
     try:
         import gspread
-        from google.oauth2.service_account import Credentials
 
-        creds = Credentials.from_service_account_file(
-            config.GOOGLE_SERVICE_ACCOUNT_JSON,
-            scopes=["https://www.googleapis.com/auth/spreadsheets"],
-        )
-        client = gspread.authorize(creds)
+        client = gspread.authorize(sheets_credentials())
         sheet = client.open_by_key(config.GOOGLE_SHEET_ID).sheet1
         existing = sheet.get_all_values()
         if not existing:

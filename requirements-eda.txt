@@ -1,0 +1,6 @@
+# Dependensi untuk notebook EDA (terpisah agar runtime pipeline tetap ringan).
+# Pasang dengan: pip install -r requirements-eda.txt
+pandas>=2.0
+duckdb>=1.0
+matplotlib>=3.8
+jupyterlab>=4.0

@@ -4,7 +4,12 @@ on:
   schedule:
     # 01:00 UTC = 08:00 WIB. Sesuaikan bila perlu.
     - cron: "0 1 * * *"
-  workflow_dispatch: {}   # tombol "Run workflow" untuk uji manual
+  workflow_dispatch:   # tombol "Run workflow" untuk uji manual
+    inputs:
+      force_llm:
+        description: "Paksa buat narasi LLM (untuk uji, walau tidak anomali)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -36,7 +41,7 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
-        run: python -m pipeline.run
+        run: python -m pipeline.run ${{ inputs.force_llm && '--force-llm' || '' }}
 
       - name: Simpan hasil ke repo
         run: |

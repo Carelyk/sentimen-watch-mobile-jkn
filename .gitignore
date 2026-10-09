@@ -12,6 +12,7 @@ venv/
 # Data mentah (bisa besar & berisi teks pengguna) jangan di-commit
 data/raw/
 data/state/
+data/backfill/raw_reviews.jsonl.gz
 
 # Editor & OS
 .vscode/

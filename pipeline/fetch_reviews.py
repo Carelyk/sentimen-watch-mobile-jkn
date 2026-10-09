@@ -15,11 +15,31 @@ def _snapshot_path(stamp: str) -> Path:
     return config.RAW_DIR / f"reviews_{stamp}.json"
 
 
-def fetch_reviews(offline: bool = False) -> list[dict]:
-    """Kembalikan daftar ulasan terbaru (maksimum ``config.REVIEW_COUNT``).
+def normalize(result: list[dict]) -> list[dict]:
+    """Ubah hasil mentah google-play-scraper menjadi bentuk ringkas kita."""
+    items: list[dict] = []
+    for r in result:
+        items.append(
+            {
+                "review_id": r.get("reviewId"),
+                "score": int(r.get("score") or 0),
+                "version": r.get("reviewCreatedVersion") or "",
+                "at": (r.get("at") or datetime.now(timezone.utc)).isoformat(),
+                "content": (r.get("content") or "").strip(),
+                "thumbs_up": int(r.get("thumbsUpCount") or 0),
+            }
+        )
+    return items
 
+
+def fetch_reviews(
+    offline: bool = False, count: int | None = None, save: bool = True
+) -> list[dict]:
+    """Kembalikan daftar ulasan terbaru.
+
+    ``count`` menimpa ``config.REVIEW_COUNT`` (dipakai backfill untuk tarik besar).
+    ``save=False`` melewati penulisan snapshot mentah.
     Setiap item: review_id, score, version, at, content, thumbs_up.
-    Dengan ``offline=True`` dipakai data/sample_reviews.json (untuk uji tanpa internet).
     """
     if offline:
         return load_offline()
@@ -37,26 +57,15 @@ def fetch_reviews(offline: bool = False) -> list[dict]:
         lang=config.REVIEW_LANG,
         country=config.REVIEW_COUNTRY,
         sort=Sort.NEWEST,
-        count=config.REVIEW_COUNT,
+        count=count or config.REVIEW_COUNT,
     )
+    items = normalize(result)
 
-    items: list[dict] = []
-    for r in result:
-        items.append(
-            {
-                "review_id": r.get("reviewId"),
-                "score": int(r.get("score") or 0),
-                "version": r.get("reviewCreatedVersion") or "",
-                "at": (r.get("at") or datetime.now(timezone.utc)).isoformat(),
-                "content": (r.get("content") or "").strip(),
-                "thumbs_up": int(r.get("thumbsUpCount") or 0),
-            }
+    if save:
+        stamp = datetime.now().strftime("%Y-%m-%d")
+        _snapshot_path(stamp).write_text(
+            json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8"
         )
-
-    stamp = datetime.now().strftime("%Y-%m-%d")
-    _snapshot_path(stamp).write_text(
-        json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
     return items
 
 

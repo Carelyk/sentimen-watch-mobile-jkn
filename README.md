@@ -15,7 +15,7 @@ Cerita satu kalimat:
 | Aspek | Pilihan |
 | --- | --- |
 | Positioning | Data Analyst (+ otomasi sebagai pembeda) |
-| Data | **Mobile JKN** (ulasan Google Play, `app.bpjs.mobile`) |
+| Data | **Mobile JKN** — ulasan Google Play (`app.bpjs.mobile`), **2025–2026 (97.566 ulasan)** |
 | Dashboard | **Looker Studio** (data via Google Sheets) |
 | Kanal alert | **GitHub Issue** (utama, otomatis); Discord webhook (opsional) |
 | Penjadwal | GitHub Actions (cron harian) |
@@ -53,7 +53,8 @@ pipeline/            <- kode pipeline (jalankan sebagai modul)
   classify.py           klasifikasi sentimen lokal (lexicon/negasi)
   detect.py             deteksi anomali vs baseline
   llm.py                panggil Gemini -> Groq, pakai template persona
-  export.py             simpan JSON/CSV + Discord + Google Sheets (opsional)
+  export.py             simpan JSON/CSV + GitHub Issue + Discord + Sheets
+  backfill.py           tarik riwayat 2025 -> sekarang (sekali jalan)
   run.py                orkestrator harian
 prompts/             <- template persona LLM
   data_analyst.md       insight harian
@@ -61,7 +62,8 @@ prompts/             <- template persona LLM
   data_engineer.md      cek kualitas data (opsional)
 data/
   sample_reviews.json   contoh data untuk uji tanpa internet
-  sentiment_daily.csv   deret waktu harian (sumber dashboard)
+  sentiment_daily.csv   deret waktu harian 2025-2026 (sumber dashboard)
+  backfill/monthly.csv  agregat bulanan (sumber dashboard)
   daily/                ringkasan JSON per hari
 .github/workflows/   <- penjadwal harian (GitHub Actions)
 ```
@@ -76,9 +78,27 @@ python -m pipeline.run --offline --no-llm
 
 # Jalankan normal (ambil ulasan asli):
 python -m pipeline.run
+
+# Backfill riwayat 2025 -> sekarang (sekali saja, aman diulang):
+python -m pipeline.backfill --start 2025-01-01
 ```
 Salin `.env.example` menjadi `.env` lalu isi kunci bila ingin narasi LLM,
 notifikasi Discord, atau ekspor Google Sheets.
+
+> Catatan Windows: pakai virtualenv milik proyek -> `.venv\Scripts\python -m pipeline.run`
+
+## Data historis (backfill 2025–2026)
+Play Store menaruh ulasan terbaru di depan, jadi `pipeline/backfill.py` menarik
+sampai **120.000 ulasan** lalu menyaring tanggal >= `--start`. Hasil nyata saat ini:
+
+- **97.566 ulasan** dari **1 Jan 2025 – sekarang**, mencakup **647 hari**.
+- `data/backfill/monthly.csv` — agregat bulanan (di-commit, untuk dashboard).
+- `data/sentiment_daily.csv` — agregat harian yang digabung (di-commit, 647 baris).
+- `data/backfill/raw_reviews.jsonl.gz` — mentah (~5,7 MB, **tidak** di-commit).
+
+Ringkas bulanan memperlihatkan pola musiman, mis. rasio negatif memuncak pada
+**Feb 2025 (30,6%)** dan **Sep 2026 (30,3%)**, sementara sentimen positif
+tertinggi pada **Des 2025 (54,3%)** — bahan cerita yang bagus.
 
 ## Berapa banyak data yang diambil?
 Default `REVIEW_COUNT=200`: **200 ulasan terbaru** setiap kali dijalankan

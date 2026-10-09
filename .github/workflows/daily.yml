@@ -26,6 +26,7 @@ jobs:
 
       - name: Jalankan pipeline
         env:
+          TZ: Asia/Jakarta
           APP_ID: app.bpjs.mobile
           APP_NAME: Mobile JKN
           REVIEW_COUNT: "200"

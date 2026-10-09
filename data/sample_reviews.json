@@ -1,0 +1,162 @@
+[
+  {
+    "review_id": "s001",
+    "score": 5,
+    "version": "5.4.1",
+    "at": "2026-10-08T09:15:00+07:00",
+    "content": "Aplikasi bagus, sekarang daftar antrean di faskes jadi mudah dan cepat. Terima kasih.",
+    "thumbs_up": 12
+  },
+  {
+    "review_id": "s002",
+    "score": 1,
+    "version": "5.4.1",
+    "at": "2026-10-08T10:02:00+07:00",
+    "content": "Gagal login terus, OTP tidak pernah masuk. Sudah coba berkali-kali tetap error. Sangat mengecewakan.",
+    "thumbs_up": 34
+  },
+  {
+    "review_id": "s003",
+    "score": 3,
+    "version": "5.4.0",
+    "at": "2026-10-08T11:20:00+07:00",
+    "content": "Lumayan membantu tapi kadang lambat waktu buka data peserta.",
+    "thumbs_up": 3
+  },
+  {
+    "review_id": "s004",
+    "score": 1,
+    "version": "5.4.1",
+    "at": "2026-10-08T12:41:00+07:00",
+    "content": "Verifikasi wajah tidak berhasil, padahal pencahayaan sudah bagus. Tolong diperbaiki.",
+    "thumbs_up": 21
+  },
+  {
+    "review_id": "s005",
+    "score": 5,
+    "version": "5.4.1",
+    "at": "2026-10-08T13:05:00+07:00",
+    "content": "Sangat membantu, informasi iuran dan riwayat pembayaran jelas. Aplikasi ringan.",
+    "thumbs_up": 8
+  },
+  {
+    "review_id": "s006",
+    "score": 2,
+    "version": "5.3.9",
+    "at": "2026-10-08T14:30:00+07:00",
+    "content": "Kenapa sekarang sering keluar sendiri ya? Belum sempat daftar malah kembali ke menu awal.",
+    "thumbs_up": 15
+  },
+  {
+    "review_id": "s007",
+    "score": 1,
+    "version": "5.4.1",
+    "at": "2026-10-08T15:12:00+07:00",
+    "content": "Captcha sulit sekali dibaca, sudah 20 kali salah. Ribet dan bikin kesal.",
+    "thumbs_up": 27
+  },
+  {
+    "review_id": "s008",
+    "score": 4,
+    "version": "5.4.1",
+    "at": "2026-10-08T16:00:00+07:00",
+    "content": "Bagus untuk cek faskes terdekat, tapi masih sering loading lama saat jam sibuk.",
+    "thumbs_up": 6
+  },
+  {
+    "review_id": "s009",
+    "score": 5,
+    "version": "5.4.1",
+    "at": "2026-10-08T17:22:00+07:00",
+    "content": "Mantap, skrining riwayat kesehatan memudahkan saya mengetahui status peserta.",
+    "thumbs_up": 5
+  },
+  {
+    "review_id": "s010",
+    "score": 1,
+    "version": "5.4.1",
+    "at": "2026-10-08T18:45:00+07:00",
+    "content": "Antrean online tidak berfungsi, tombol daftar tidak bisa diklik. Mohon segera diperbaiki.",
+    "thumbs_up": 18
+  },
+  {
+    "review_id": "s011",
+    "score": 2,
+    "version": "5.3.9",
+    "at": "2026-10-08T19:10:00+07:00",
+    "content": "Sering gagal saat unggah berkas, proses lama sekali. Cukup menyulitkan.",
+    "thumbs_up": 9
+  },
+  {
+    "review_id": "s012",
+    "score": 5,
+    "version": "5.4.1",
+    "at": "2026-10-08T20:05:00+07:00",
+    "content": "Pelayanan digital makin baik, pembayaran iuran sekarang praktis dan aman.",
+    "thumbs_up": 11
+  },
+  {
+    "review_id": "s013",
+    "score": 1,
+    "version": "5.4.1",
+    "at": "2026-10-08T21:18:00+07:00",
+    "content": "Setelah update jadi error terus, tidak bisa buka menu utama. Sangat buruk.",
+    "thumbs_up": 41
+  },
+  {
+    "review_id": "s014",
+    "score": 3,
+    "version": "5.4.0",
+    "at": "2026-10-08T22:00:00+07:00",
+    "content": "Biasa saja, fitur cukup lengkap tapi tampilan agak membingungkan untuk orang tua.",
+    "thumbs_up": 2
+  },
+  {
+    "review_id": "s015",
+    "score": 1,
+    "version": "5.4.1",
+    "at": "2026-10-08T22:30:00+07:00",
+    "content": "Tidak bisa login sejak kemarin, padahal nomor sudah benar. Kecewa berat.",
+    "thumbs_up": 30
+  },
+  {
+    "review_id": "s016",
+    "score": 5,
+    "version": "5.4.1",
+    "at": "2026-10-09T07:12:00+07:00",
+    "content": "Keren, sekarang bisa lihat riwayat pembayaran dengan jelas dan rapi.",
+    "thumbs_up": 4
+  },
+  {
+    "review_id": "s017",
+    "score": 2,
+    "version": "5.4.1",
+    "at": "2026-10-09T08:20:00+07:00",
+    "content": "Loading lambat sekali, sudah tunggu sepuluh menit masih muter.",
+    "thumbs_up": 13
+  },
+  {
+    "review_id": "s018",
+    "score": 4,
+    "version": "5.4.1",
+    "at": "2026-10-09T09:00:00+07:00",
+    "content": "Membantu sekali untuk daftar ke faskes, cuma kadang notifikasi telat.",
+    "thumbs_up": 7
+  },
+  {
+    "review_id": "s019",
+    "score": 1,
+    "version": "5.4.1",
+    "at": "2026-10-09T10:15:00+07:00",
+    "content": "Verifikasi gagal terus tanpa alasan jelas. Uang sudah dibayar tapi data tidak muncul.",
+    "thumbs_up": 22
+  },
+  {
+    "review_id": "s020",
+    "score": 5,
+    "version": "5.4.1",
+    "at": "2026-10-09T11:30:00+07:00",
+    "content": "Aplikasi bermanfaat dan gratis, informasi program JKN lengkap.",
+    "thumbs_up": 6
+  }
+]

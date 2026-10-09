@@ -1,0 +1,46 @@
+name: Sentimen Watch harian
+
+on:
+  schedule:
+    # 01:00 UTC = 08:00 WIB. Sesuaikan bila perlu.
+    - cron: "0 1 * * *"
+  workflow_dispatch: {}   # tombol "Run workflow" untuk uji manual
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  harian:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Pasang dependensi
+        run: pip install -r requirements.txt
+
+      - name: Jalankan pipeline
+        env:
+          APP_ID: app.bpjs.mobile
+          APP_NAME: Mobile JKN
+          REVIEW_COUNT: "200"
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+        run: python -m pipeline.run
+
+      - name: Simpan hasil ke repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/sentiment_daily.csv data/daily/
+          git diff --cached --quiet || git commit -m "data: hasil harian $(date -u +%F)"
+          git push

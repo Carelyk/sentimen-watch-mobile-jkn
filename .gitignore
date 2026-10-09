@@ -1,0 +1,20 @@
+# Rahasia & konfigurasi lokal
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Data mentah (bisa besar & berisi teks pengguna) jangan di-commit
+data/raw/
+data/state/
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

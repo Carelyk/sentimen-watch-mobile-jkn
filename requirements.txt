@@ -1,0 +1,8 @@
+# Pipeline inti (ringan, tanpa LLM untuk klasifikasi)
+requests>=2.31
+google-play-scraper>=1.2.7
+python-dotenv>=1.0.1
+
+# Opsional: kirim hasil otomatis ke Google Sheets (untuk dashboard Looker Studio)
+gspread>=6.0.0
+google-auth>=2.30.0

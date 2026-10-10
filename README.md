@@ -71,6 +71,8 @@ data/
   sentiment_daily.csv   deret waktu harian 2025-2026 (sumber dashboard)
   backfill/monthly.csv  agregat bulanan (sumber dashboard)
   daily/                ringkasan JSON per hari
+langflow/
+  sentimen_watch_mobile_jkn.json   flow visual Langflow (import lalu jalankan)
 .github/workflows/   <- penjadwal harian (GitHub Actions)
 requirements.txt       dependensi pipeline
 requirements-eda.txt   dependensi notebook EDA
@@ -178,7 +180,7 @@ File contoh kecil lain: `data/langflow_contoh_ulasan.csv` (40 baris, format
 sama seperti sample).
 
 ### Cara import & jalankan
-1. Di Langflow: **Import** flow → pilih JSON flow ini.
+1. Di Langflow: **Import** flow → pilih `langflow/sentimen_watch_mobile_jkn.json`.
 2. Buka node **Read File** → **upload** `data/ulasan_mobile_jkn_sample.csv`.
 3. Pastikan kredensial **Google AI** (`GOOGLE_API_KEY`) tersedia di Langflow.
 4. **Run** → keluaran JSON: `{ summary, sentiment, action_item[], catatan_keterbatasan }`.

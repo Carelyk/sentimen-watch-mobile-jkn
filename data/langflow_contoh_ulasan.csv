@@ -1,0 +1,41 @@
+review,rating,source
+"Koneksi terus timeout saat login ke aplikasi, padahal jaringan bagus.",1,playstore_sample
+"Notifikasi verifikasi sering error dan harus coba berulang.",1,playstore_sample
+"Aplikasi sering crash saat buka halaman antrean.",1,playstore_sample
+"Foto KTP/Kartu Keluarga sulit terupload, loading lama.",2,playstore_sample
+"Antrean online tidak update, nomor antrean bergeser.",2,playstore_sample
+"Menu jadwal dokter sering tidak muncul.",2,playstore_sample
+"Proses klaim/bukti kunjungan agak ribet.",2,playstore_sample
+"Aplikasi lebih stabil dibanding versi sebelumnya, navigasi cukup jelas.",3,playstore_sample
+"Informasi lokasi faskes cukup lengkap.",3,playstore_sample
+"Beberapa fitur bisa diakses tanpa masalah.",3,playstore_sample
+"Sangat membantu untuk cek antrean dan jadwal dokter.",4,playstore_sample
+"Tampilan baru lebih enak dipakai dan lebih responsif.",4,playstore_sample
+"Verifikasi via kamera memudahkan proses.",4,playstore_sample
+"Pendaftaran online sangat mempermudah, terima kasih!",4,playstore_sample
+"Proses antrean online berjalan lancar dan hemat waktu.",5,playstore_sample
+"Fitur cukup lengkap dan informasi jelas.",5,playstore_sample
+"Bisa cek kartu dan antrean dari rumah, sangat berguna.",5,playstore_sample
+"Login bisa pakai biometrik jadi praktis.",5,playstore_sample
+"Aplikasi masih loading lama saat cek riwayat kunjungan.",2,playstore_sample
+"Suka banget bisa lihat jadwal dokter tanpa ke loket.",5,playstore_sample
+"Ada bug nomor antrean yang kadang salah ditampilkan.",2,playstore_sample
+"Kualitas jaringan internal aplikasi kadang lambat.",3,playstore_sample
+"Setelah update terbaru, login jadi lebih cepat.",4,playstore_sample
+"Foto upload sering gagal meski izin sudah aktif.",1,playstore_sample
+"Informasi antrean kadang tidak real-time.",2,playstore_sample
+"Cara penggunaan mudah dipahami.",4,playstore_sample
+"Panduan pendaftaran cukup jelas.",4,playstore_sample
+"Kadang keluar sendiri saat sedang proses.",1,playstore_sample
+"Tidak bisa reset password walaupun email benar.",1,playstore_sample
+"Cek saldo/rujukan berjalan normal.",3,playstore_sample
+"UI bersih dan mudah dinavigasi.",4,playstore_sample
+"Sangat membantu khususnya di jam sibuk.",5,playstore_sample
+"Perlu perbaiki notifikasi agar lebih tepat waktu.",3,playstore_sample
+"Filter faskes berdasarkan poli belum bekerja optimal.",3,playstore_sample
+"Antrean ter-cancel tanpa konfirmasi.",2,playstore_sample
+"Pembaharuan data anggota lancar.",4,playstore_sample
+"Fitur e-resep bisa sangat membantu jika ditingkatkan.",4,playstore_sample
+"Overall cukup baik, semoga lebih stabil.",4,playstore_sample
+"Semoga kedepannya bisa ditambahkan fitur dark mode.",3,playstore_sample
+"Pengalaman berobat jadi jauh lebih praktis.",5,playstore_sample

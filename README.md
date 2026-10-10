@@ -137,6 +137,52 @@ selalu ada data baru.
 - `data_scientist.md` : `{dataset}` `{sampel}` `{metrik_json}` `{contoh_salah}`
 - `data_engineer.md`  : `{sumber_data}` `{periode}` `{statistik_ingest}`
 
+## Flow Langflow — "Sentimen Watch — Mobile JKN"
+
+Selain pipeline Python di atas, repo ini punya **flow visual Langflow** untuk demo
+analisis cepat satu berkas ulasan (import lalu jalankan).
+
+### Rantai node
+```
+Read File (upload)
+  -> Prompt Template 1  {text}
+  -> Language Model      (gemini-3.8-flash)
+  -> Load JSON           (JSON string)
+       |- Parser  "{summary}"     -> Prompt Template 2 {summary, sentiment}
+       |- Parser  "{sentiment}"   ->            |
+                                                 v
+                              Language Model 2 (gemini-3.8-flash) -> Chat Output
+```
+
+### Kenapa begini (catatan teknis)
+- **Tipe harus nyambung.** `Load JSON` mengeluarkan tipe `JSON`, sedangkan variabel di
+  `Prompt Template` menerima `Message`. Perantara **`Parser`** (input JSON/Data →
+  output `Message`) yang menjembatani. Menyambung `JSON → Prompt` langsung ditolak
+  Langflow ("invalid handles").
+- **`Parser` → Mode = Parser, output `Parsed Text`.** Field **Mode** dan output tetap
+  dipertahankan; pola `{summary}` dan `{sentiment}` memecah JSON hasil LLM.
+- **Tanpa `jq`.** Komponen `Load JSON` memakai `json_repair` (sudah terpasang), jadi
+  tidak perlu `pip install jq` seperti komponen "Parse JSON".
+- **Model `gemini-3.8-flash`.** `gemini-2.5-flash` sudah deprecated (404 NOT_FOUND);
+  Google menyarankan `gemini-3.8-flash`.
+- **File harus di-upload, bukan path lokal.** Karena
+  `LANGFLOW_RESTRICT_LOCAL_FILE_ACCESS=true`, `Read File` menolak path lokal. Upload
+  CSV ke storage flow → nilai `path` menjadi `<flow_id>/<timestamp>_<nama_file>`.
+
+### Data yang dipakai
+`data/ulasan_mobile_jkn_sample.csv` — **1.000 ulasan** Mobile JKN dari Google Play
+(`app.bpjs.mobile`), kolom `content, score, at, appVersion`, rentang **30 Sep – 9 Okt 2026**
+(distribusi rating: 594×bintang 5, 296×bintang 1, sisanya bintang 2–4).
+File contoh kecil lain: `data/langflow_contoh_ulasan.csv` (40 baris, format
+`review,rating,source`) dan `data/langflow_contoh_ulasan_bjps.csv` (40 baris, format
+sama seperti sample).
+
+### Cara import & jalankan
+1. Di Langflow: **Import** flow → pilih JSON flow ini.
+2. Buka node **Read File** → **upload** `data/ulasan_mobile_jkn_sample.csv`.
+3. Pastikan kredensial **Google AI** (`GOOGLE_API_KEY`) tersedia di Langflow.
+4. **Run** → keluaran JSON: `{ summary, sentiment, action_item[], catatan_keterbatasan }`.
+
 ## Rahasia yang dibutuhkan (GitHub Secrets)
 | Nama | Kegunaan | Wajib? |
 | --- | --- | --- |

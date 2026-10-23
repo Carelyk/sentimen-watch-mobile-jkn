@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-23",
+  "app": "Mobile JKN",
+  "summary": {
+    "total": 200,
+    "positif": 49,
+    "negatif": 88,
+    "netral": 63,
+    "pos_ratio": 0.245,
+    "neg_ratio": 0.44
+  },
+  "baseline": {
+    "days": 7,
+    "neg_ratio": 0.2514
+  },
+  "verdict": {
+    "anomaly": true,
+    "reasons": [
+      "rasio negatif naik >= 50% vs baseline (+18.9 poin)",
+      "rasio negatif >= 35% (44.0%)"
+    ]
+  },
+  "provider": "groq",
+  "insight": {
+    "ringkasan": "Pada 23 Oktober 2026 terdapat 200 ulasan aplikasi Mobile JKN: 49 positif (24.5%), 88 negatif (44.0%), 63 netral (31.5%).",
+    "tren": "Rasio ulasan negatif meningkat tajam menjadi 44.0% dibanding baseline 7 hari sebelumnya sebesar 25.14%, naik sekitar 75% relatif (+18.9 poin). Positif tetap rendah dan tidak ada peningkatan signifikan.",
+    "anomali": [
+      {
+        "temuan": "Lonjakan ulasan negatif",
+        "bukti_angka": "Negatif 88/200 = 44.0% vs baseline 25.14% (kenaikan +18.9 poin, >50% relatif)",
+        "dugaan_penyebab": "Kemungkinan terkait pembaruan aplikasi terbaru, bug performa, atau perubahan kebijakan yang tidak disosialisasikan dengan baik."
+      }
+    ],
+    "rekomendasi": [
+      {
+        "tindakan": "Lakukan analisis akar penyebab (root cause analysis) terhadap ulasan negatif terbaru",
+        "alasan": "Mengidentifikasi masalah teknis atau fungsional yang memicu keluhan untuk perbaikan cepat",
+        "prioritas": 1
+      },
+      {
+        "tindakan": "Perbaiki dan rilis pembaruan yang menanggapi isu-isu kritis yang teridentifikasi",
+        "alasan": "Menurunkan rasio negatif dengan menyelesaikan bug atau fitur yang mengganggu pengalaman pengguna",
+        "prioritas": 2
+      },
+      {
+        "tindakan": "Tingkatkan komunikasi proaktif ke pengguna melalui balasan ulasan dan notifikasi dalam aplikasi",
+        "alasan": "Membangun kepercayaan, menunjukkan bahwa tim mendengar keluhan, dan dapat mengubah persepsi negatif menjadi netral/positif",
+        "prioritas": 3
+      }
+    ],
+    "catatan_keterbatasan": "Data hanya berupa agregat rasio dan jumlah ulasan; tidak ada detail per kategori keluhan, tidak ada tren historis lebih lama, serta tidak ada baseline untuk rasio positif."
+  }
+}

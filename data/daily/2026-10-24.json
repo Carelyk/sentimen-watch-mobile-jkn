@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-24",
+  "app": "Mobile JKN",
+  "summary": {
+    "total": 200,
+    "positif": 68,
+    "negatif": 73,
+    "netral": 59,
+    "pos_ratio": 0.34,
+    "neg_ratio": 0.365
+  },
+  "baseline": {
+    "days": 7,
+    "neg_ratio": 0.2843
+  },
+  "verdict": {
+    "anomaly": true,
+    "reasons": [
+      "rasio negatif >= 35% (36.5%)"
+    ]
+  },
+  "provider": "groq",
+  "insight": {
+    "ringkasan": "Pada 24 Oct 2026 terdapat 200 ulasan: 68 positif (34%), 73 negatif (36.5%), 59 netral (29%).",
+    "tren": "Rasio negatif naik signifikan dibanding baseline 7 hari sebelumnya (28.43% → 36.5%), meningkat 8.07 poin persentase; data rasio positif baseline tidak tersedia sehingga tren positif tidak dapat dibandingkan.",
+    "anomali": [
+      {
+        "temuan": "Negatif ratio meningkat tajam",
+        "bukti_angka": "Negatif 73/200 = 36.5% vs baseline 28.43%",
+        "dugaan_penyebab": "Kemungkinan terkait pembaruan aplikasi terbaru atau masalah layanan yang memicu keluhan pengguna"
+      }
+    ],
+    "rekomendasi": [
+      {
+        "tindakan": "Lakukan analisis akar penyebab (audit versi aplikasi, log crash, dan keluhan spesifik)",
+        "alasan": "Mengidentifikasi faktor yang memicu lonjakan negatif untuk perbaikan cepat",
+        "prioritas": 1
+      },
+      {
+        "tindakan": "Perbaiki isu yang teridentifikasi dan komunikasikan perbaikan kepada pengguna melalui update dan notifikasi",
+        "alasan": "Menunjukkan responsifitas dan mengurangi sentimen negatif",
+        "prioritas": 2
+      },
+      {
+        "tindakan": "Terapkan pemantauan sentimen harian dengan ambang batas alert (misalnya negatif >35%)",
+        "alasan": "Mencegah kejadian serupa di masa depan dengan deteksi dini",
+        "prioritas": 3
+      }
+    ],
+    "catatan_keterbatasan": "Analisis terbatas pada metrik total, positif, negatif, netral, dan rasio yang diberikan; tidak ada detail kategori keluhan atau data baseline positif."
+  }
+}

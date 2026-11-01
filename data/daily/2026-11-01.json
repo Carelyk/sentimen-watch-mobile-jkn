@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-01",
+  "app": "Mobile JKN",
+  "summary": {
+    "total": 200,
+    "positif": 93,
+    "negatif": 51,
+    "netral": 56,
+    "pos_ratio": 0.465,
+    "neg_ratio": 0.255
+  },
+  "baseline": {
+    "days": 7,
+    "neg_ratio": 0.2436
+  },
+  "verdict": {
+    "anomaly": false,
+    "reasons": []
+  },
+  "provider": null,
+  "insight": null
+}

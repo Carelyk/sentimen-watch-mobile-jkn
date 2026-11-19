@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-19",
+  "app": "Mobile JKN",
+  "summary": {
+    "total": 200,
+    "positif": 51,
+    "negatif": 86,
+    "netral": 63,
+    "pos_ratio": 0.255,
+    "neg_ratio": 0.43
+  },
+  "baseline": {
+    "days": 7,
+    "neg_ratio": 0.2836
+  },
+  "verdict": {
+    "anomaly": true,
+    "reasons": [
+      "rasio negatif naik >= 50% vs baseline (+14.6 poin)",
+      "rasio negatif >= 35% (43.0%)"
+    ]
+  },
+  "provider": "groq",
+  "insight": {
+    "ringkasan": "Pada 19‑Nov‑2026 terdapat 200 ulasan; 51 positif (25.5%), 86 negatif (43.0%), 63 netral (31.5%).",
+    "tren": "Rasio negatif naik signifikan menjadi 0.43 dibanding baseline 0.2836 (kenaikan 14.6 poin atau +51.6%), menandakan penurunan kepuasan dibanding minggu sebelumnya.",
+    "anomali": [
+      {
+        "temuan": "Negatif ratio tinggi",
+        "bukti_angka": "Negatif=86/200=0.43 vs baseline 0.2836 (+14.6 poin, +51.6%)",
+        "dugaan_penyebab": "Kemungkinan bug terbaru, penurunan performa, atau perubahan kebijakan yang tidak disukai pengguna"
+      }
+    ],
+    "rekomendasi": [
+      {
+        "tindakan": "Lakukan analisis akar penyebab (bug, performa, kebijakan) pada ulasan negatif",
+        "alasan": "Menangkap isu utama yang memicu lonjakan negatif",
+        "prioritas": 1
+      },
+      {
+        "tindakan": "Perbaiki atau rollback perubahan yang menyebabkan keluhan",
+        "alasan": "Mengurangi friksi pengguna dan menurunkan rasio negatif",
+        "prioritas": 2
+      },
+      {
+        "tindakan": "Tanggapi secara proaktif ulasan negatif di Play Store dengan solusi spesifik",
+        "alasan": "Meningkatkan persepsi pengguna dan dapat mengubah sentimen negatif menjadi positif",
+        "prioritas": 3
+      }
+    ],
+    "catatan_keterbatasan": "Data hanya mencakup jumlah total, positif, negatif, netral dan rasio; tidak ada detail tema ulasan atau baseline positif untuk analisis lebih mendalam."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-20",
+  "app": "Mobile JKN",
+  "summary": {
+    "total": 200,
+    "positif": 52,
+    "negatif": 84,
+    "netral": 64,
+    "pos_ratio": 0.26,
+    "neg_ratio": 0.42
+  },
+  "baseline": {
+    "days": 7,
+    "neg_ratio": 0.3107
+  },
+  "verdict": {
+    "anomaly": true,
+    "reasons": [
+      "rasio negatif >= 35% (42.0%)"
+    ]
+  },
+  "provider": "groq",
+  "insight": {
+    "ringkasan": "Pada 20 Nov 2026 terdapat 200 ulasan; positif 52 (26%), negatif 84 (42%), netral 64 (32%). Rasio negatif naik signifikan dibanding baseline 7 hari sebelumnya (31.07%).",
+    "tren": "Negatif meningkat sekitar 11 poin persentase (0.42 vs 0.3107), sementara proporsi positif dan netral tidak dapat dibandingkan karena tidak ada data baseline.",
+    "anomali": [
+      {
+        "temuan": "Rasio negatif tinggi",
+        "bukti_angka": "Negatif 84/200 = 0.42 vs baseline 0.3107",
+        "dugaan_penyebab": "Kemungkinan munculnya bug atau perubahan fitur setelah update terbaru yang menurunkan kepuasan pengguna."
+      }
+    ],
+    "rekomendasi": [
+      {
+        "tindakan": "Lakukan analisis mendalam pada ulasan negatif untuk mengidentifikasi masalah spesifik (bug, performa, kebijakan).",
+        "alasan": "Menemukan akar penyebab akan mempercepat perbaikan yang paling berdampak.",
+        "prioritas": 1
+      },
+      {
+        "tindakan": "Prioritaskan perbaikan teknis atau UX yang paling sering disebutkan dalam ulasan negatif dan rilis pembaruan cepat.",
+        "alasan": "Mengurangi sentimen negatif secara langsung meningkatkan kepuasan pengguna.",
+        "prioritas": 2
+      },
+      {
+        "tindakan": "Komunikasikan secara proaktif kepada pengguna tentang perbaikan yang sedang dilakukan melalui update log dan notifikasi dalam aplikasi.",
+        "alasan": "Transparansi dapat meredam frustrasi dan memperbaiki persepsi publik.",
+        "prioritas": 3
+      }
+    ],
+    "catatan_keterbatasan": "Tidak tersedia rasio positif/negatif baseline serta detail penyebab spesifik; analisis didasarkan pada data agregat saja."
+  }
+}

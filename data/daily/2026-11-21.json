@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-21",
+  "app": "Mobile JKN",
+  "summary": {
+    "total": 200,
+    "positif": 61,
+    "negatif": 74,
+    "netral": 65,
+    "pos_ratio": 0.305,
+    "neg_ratio": 0.37
+  },
+  "baseline": {
+    "days": 7,
+    "neg_ratio": 0.335
+  },
+  "verdict": {
+    "anomaly": true,
+    "reasons": [
+      "rasio negatif >= 35% (37.0%)"
+    ]
+  },
+  "provider": "groq",
+  "insight": {
+    "ringkasan": "Pada 2026-11-21 terdapat 200 ulasan: 61 positif (30.5%), 74 negatif (37.0%), 65 netral (32.5%). Negatif ratio naik dari 33.5% (baseline 7 hari) menjadi 37.0%.",
+    "tren": "Negatif ratio meningkat 3.5 poin persentase (≈10.4% relatif) dibanding baseline, sementara positif ratio tetap di sekitar 30%. Hal ini menunjukkan penurunan kepuasan pengguna.",
+    "anomali": [
+      {
+        "temuan": "Negatif ratio naik signifikan",
+        "bukti_angka": "Negatif: 74/200 = 37.0% (baseline 33.5%)",
+        "dugaan_penyebab": "Kemungkinan bug atau perubahan fitur pada versi terbaru aplikasi yang menimbulkan keluhan pengguna."
+      }
+    ],
+    "rekomendasi": [
+      {
+        "tindakan": "Lakukan analisis penyebab keluhan dengan menelaah ulasan negatif dan memeriksa log perubahan versi terakhir.",
+        "alasan": "Identifikasi akar masalah agar dapat diperbaiki cepat dan menurunkan rasio negatif.",
+        "prioritas": 1
+      },
+      {
+        "tindakan": "Rilis perbaikan atau hotfix untuk masalah yang teridentifikasi dalam 48‑72 jam.",
+        "alasan": "Menunjukkan respons cepat kepada pengguna, dapat menurunkan sentimen negatif secara langsung.",
+        "prioritas": 2
+      },
+      {
+        "tindakan": "Komunikasikan perbaikan melalui update notes dan kanal dukungan, serta monitor sentimen selama 7 hari ke depan.",
+        "alasan": "Transparansi meningkatkan kepercayaan pengguna dan memungkinkan evaluasi efektivitas perbaikan.",
+        "prioritas": 3
+      }
+    ],
+    "catatan_keterbatasan": "Data tidak menyediakan detail per versi, demografi pengguna, atau kategori keluhan, sehingga dugaan penyebab bersifat spekulatif."
+  }
+}
